@@ -37,3 +37,13 @@ finally:
   RG.cleanup(dac)
   print('Cleaned and ended')
         
+def adc():
+    k = 0
+    for i in range(7, -1, -1):
+        k+=2**i
+        gpio.output(dac, convert(k))
+        sleep(0.005)
+        if gpio.input(comp) == 0:
+            k-=2**i
+    return k
+
